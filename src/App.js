@@ -3,6 +3,15 @@ import User from './User';
 import './App.css';
 import axios from 'axios';
 
+// Define API URL constant
+const API_URL = 'http://127.0.0.1:5000';
+
+// Define authentication credentials
+const AUTH_CREDENTIALS = {
+  username: 'admin',
+  password: 'password'
+};
+
 function App() {
 
   const [users, setUsers] = useState([]);
@@ -15,11 +24,8 @@ function App() {
 
   const fetchUsers = async () => {
     try {
-      const response = await axios.get('http://127.0.0.1:5000/users', {
-        auth: {
-          username: 'admin',
-          password: 'password'
-        }
+      const response = await axios.get(`${API_URL}/users`, {
+        auth: AUTH_CREDENTIALS
       });
       setUsers(response.data.data); // Assuming users are in response.data.data
     } catch (error) {
@@ -29,11 +35,8 @@ function App() {
 
   const deleteUser = async (id) => {
     try {
-      await axios.delete(`http://127.0.0.1:5000/users/${id}`, {
-        auth: {
-          username: 'admin',
-          password: 'password'
-        }
+      await axios.delete(`${API_URL}/users/${id}`, {
+        auth: AUTH_CREDENTIALS
       });
       // Fetch updated list of users after deleting a user
       fetchUsers();
@@ -44,11 +47,8 @@ function App() {
 
   const updateUserPoints = async (id, delta) => {
     try {
-      await axios.post('http://127.0.0.1:5000/users/score', { user_id: id, score: delta }, {
-        auth: {
-          username: 'admin',
-          password: 'password'
-        }
+      await axios.post(`${API_URL}/users/score`, { user_id: id, score: delta }, {
+        auth: AUTH_CREDENTIALS
       });
       // Fetch updated list of users after updating user points
       fetchUsers();
@@ -64,11 +64,8 @@ function App() {
   const addUser = async () => {
     try {
       const newUser = {};
-      await axios.post('http://127.0.0.1:5000/users', newUser, {
-        auth: {
-          username: 'admin',
-          password: 'password'
-        }
+      await axios.post(`${API_URL}/users`, newUser, {
+        auth: AUTH_CREDENTIALS
       });
       // Fetch updated list of users after adding a new user
       fetchUsers();
