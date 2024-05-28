@@ -5,7 +5,6 @@
     border: 1px solid #ccc;
     padding: 10px;
     margin: 10px 0;
-    width: 300px;
 }
 
 .user button {
@@ -28,9 +27,11 @@
     border: 1px solid #ccc;
     padding: 10px;
     margin-top: 10px;
+    width: 280px; /* Adjust width to match user div */
+    margin-left: auto;
+    margin-right: auto;
 }
 
-.user-details button {
-    margin-top: 10px;
-    cursor: pointer;
+.user-details p {
+    margin: 5px 0;
 }

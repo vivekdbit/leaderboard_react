@@ -24,7 +24,7 @@ function App() {
 
   const fetchUsers = async () => {
     try {
-      const response = await axios.get(`${API_URL}/users`, {
+      const response = await axios.get(`${API_URL}/api/v1/users`, {
         auth: AUTH_CREDENTIALS
       });
       setUsers(response.data.data); // Assuming users are in response.data.data
@@ -35,7 +35,7 @@ function App() {
 
   const deleteUser = async (id) => {
     try {
-      await axios.delete(`${API_URL}/users/${id}`, {
+      await axios.delete(`${API_URL}/api/v1/users/${id}`, {
         auth: AUTH_CREDENTIALS
       });
       // Fetch updated list of users after deleting a user
@@ -47,7 +47,7 @@ function App() {
 
   const updateUserPoints = async (id, delta) => {
     try {
-      await axios.post(`${API_URL}/users/score`, { user_id: id, score: delta }, {
+      await axios.post(`${API_URL}/api/v1/users/score`, { user_id: id, score: delta }, {
         auth: AUTH_CREDENTIALS
       });
       // Fetch updated list of users after updating user points
@@ -64,7 +64,7 @@ function App() {
   const addUser = async () => {
     try {
       const newUser = {};
-      await axios.post(`${API_URL}/users`, newUser, {
+      await axios.post(`${API_URL}/api/v1/users`, newUser, {
         auth: AUTH_CREDENTIALS
       });
       // Fetch updated list of users after adding a new user
@@ -79,7 +79,7 @@ function App() {
       <div className="user-container">
         {users.map(user => (
           <User
-            key={user.id}
+            key={user._id}
             user={user}
             deleteUser={deleteUser}
             updateUserPoints={updateUserPoints}
